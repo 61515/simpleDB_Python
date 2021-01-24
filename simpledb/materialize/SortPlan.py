@@ -79,7 +79,7 @@ class SortPlan(Plan):
     def splitIntoRuns(self, src):
         temps = []
         src.beforeFirst()
-        if not src.next:
+        if not src.next():
             return temps
         currenttemp = TempTable(self.tx, self.sch)
         temps.append(currenttemp)
@@ -110,8 +110,8 @@ class SortPlan(Plan):
         result = TempTable(self.tx, self.sch)
         dest = result.open()
 
-        hasmore1 = src1.next
-        hasmore2 = src2.next
+        hasmore1 = src1.next()
+        hasmore2 = src2.next()
         while hasmore1 and hasmore2:
             if self.comp.compare(src1, src2) < 0:
                 hasmore1 = self.copy(src1, dest)
@@ -133,4 +133,4 @@ class SortPlan(Plan):
         dest.insert()
         for fldname in self.sch.fields():
             dest.setVal(fldname, src.getVal(fldname))
-        return src.next
+        return src.next()

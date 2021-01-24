@@ -31,7 +31,7 @@ class GroupByScan(Scan):
     #
     def beforeFirst(self):
         self.s.beforeFirst()
-        self.moregroups = self.s.next
+        self.moregroups = self.s.next()
 
     #
     #     * Move to the next group.

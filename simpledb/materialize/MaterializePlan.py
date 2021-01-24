@@ -31,7 +31,7 @@ class MaterializePlan(Plan):
         temp = TempTable(self.tx, sch)
         src = self.srcplan.open()
         dest = temp.open()
-        while src.next:
+        while src.next():
             dest.insert()
             for fldname in sch.fields():
                 dest.setVal(fldname, src.getVal(fldname))

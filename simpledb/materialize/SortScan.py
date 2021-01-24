@@ -23,10 +23,10 @@ class SortScan(Scan):
         self.savedposition = None
         self.comp = comp
         self.s1 = runs[0].open()
-        self.hasmore1 = self.s1.next
+        self.hasmore1 = self.s1.next()
         if len(runs) > 1:
             self.s2 = runs[1].open()
-            self.hasmore2 = self.s2.next
+            self.hasmore2 = self.s2.next()
 
     #
     #     * Position the scan before the first record in sorted order.
@@ -38,10 +38,10 @@ class SortScan(Scan):
     def beforeFirst(self):
         self.currentscan = None
         self.s1.beforeFirst()
-        self.hasmore1 = self.s1.next
+        self.hasmore1 = self.s1.next()
         if self.s2 is not None:
             self.s2.beforeFirst()
-            self.hasmore2 = self.s2.next
+            self.hasmore2 = self.s2.next()
 
     #
     #     * Move to the next record in sorted order.
@@ -53,9 +53,9 @@ class SortScan(Scan):
     def next(self):
         if self.currentscan is not None:
             if self.currentscan == self.s1:
-                self.hasmore1 = self.s1.next
+                self.hasmore1 = self.s1.next()
             elif self.currentscan == self.s2:
-                self.hasmore2 = self.s2.next
+                self.hasmore2 = self.s2.next()
 
         if not self.hasmore1 and not self.hasmore2:
             return False
