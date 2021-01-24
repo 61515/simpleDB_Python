@@ -1,0 +1,7 @@
+class Integer:
+    BYTES = 4
+    BLOCKSIZE = 400
+    CHARSET = "ANSI"
+    BYTESPERCHAR = 1
+    MAX_VALUE = 2147483647
+    MIN_VALUE = -2147483648
